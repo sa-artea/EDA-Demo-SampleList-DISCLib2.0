@@ -51,10 +51,10 @@ def newCatalog():
                'tags': None,
                'book_tags': None}
 
-    catalog['books'] = lt.newList()
-    catalog['authors'] = lt.newList('ARRAY_LIST',
+    catalog['books'] = lt.newList('ARRAY_LIST')
+    catalog['authors'] = lt.newList('SINGLE_LINKED',
                                     cmpfunction=compareauthors)
-    catalog['tags'] = lt.newList('ARRAY_LIST',
+    catalog['tags'] = lt.newList('SINGLE_LINKED',
                                  cmpfunction=comparetagnames)
     catalog['book_tags'] = lt.newList('ARRAY_LIST')
 
@@ -72,6 +72,7 @@ def addBook(catalog, book):
     # crea un libro en la lista de dicho autor (apuntador al libro)
     for author in authors:
         addBookAuthor(catalog, author.strip(), book)
+    return catalog
 
 
 def addBookAuthor(catalog, authorname, book):
@@ -87,6 +88,7 @@ def addBookAuthor(catalog, authorname, book):
         author = newAuthor(authorname)
         lt.addLast(authors, author)
     lt.addLast(author['books'], book)
+    return catalog
 
 
 def addTag(catalog, tag):
@@ -95,6 +97,7 @@ def addTag(catalog, tag):
     """
     t = newTag(tag['tag_name'], tag['tag_id'])
     lt.addLast(catalog['tags'], t)
+    return catalog
 
 
 def addBookTag(catalog, booktag):
@@ -103,6 +106,7 @@ def addBookTag(catalog, booktag):
     """
     t = newBookTag(booktag['tag_id'], booktag['goodreads_book_id'])
     lt.addLast(catalog['book_tags'], t)
+    return catalog
 
 
 # Funciones para creacion de datos
@@ -178,8 +182,23 @@ def countBooksByTag(catalog, tag):
     return bookcount
 
 
-# Funciones utilizadas para comparar elementos dentro de una lista
+def bookSize(catalog):
+    return lt.size(catalog['books'])
 
+
+def authorSize(catalog):
+    return lt.size(catalog['authors'])
+
+
+def tagSize(catalog):
+    return lt.size(catalog['tags'])
+
+
+def bookTagSize(catalog):
+    return lt.size(catalog['book_tags'])
+
+
+# Funciones utilizadas para comparar elementos dentro de una lista
 def compareauthors(authorname1, author):
     if (authorname1.lower() in author['name'].lower()):
         return 0
