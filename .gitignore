@@ -136,5 +136,7 @@ dmypy.json
 !Data/GoodReads/tags.csv
 
 .vim
-
 .DS_Store
+
+# VS code
+.vscode/
