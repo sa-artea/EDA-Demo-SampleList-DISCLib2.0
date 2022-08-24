@@ -59,7 +59,7 @@ def printMenu():
     print("0- Salir")
 
 
-def loadData():
+def loadData(control):
     """
     Solicita al controlador que cargue los datos en el modelo
     """
@@ -107,7 +107,7 @@ while True:
     inputs = input('Seleccione una opción para continuar\n')
     if int(inputs[0]) == 1:
         print("Cargando información de los archivos ....")
-        bk, at, tg, bktg = loadData()
+        bk, at, tg, bktg = loadData(control)
         print('Libros cargados: ' + str(bk))
         print('Autores cargados: ' + str(at))
         print('Géneros cargados: ' + str(tg))
