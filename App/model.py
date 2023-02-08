@@ -57,6 +57,7 @@ def newCatalog():
     catalog['tags'] = lt.newList('SINGLE_LINKED',
                                  cmpfunction=comparetagnames)
     catalog['book_tags'] = lt.newList('ARRAY_LIST')
+    #TODO 4.5 Modificar el uso del TAD lista (p.30.) 
 
     return catalog
 

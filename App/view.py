@@ -99,39 +99,46 @@ def printBestBooks(books):
 # Se crea el controlador asociado a la vista
 control = newController()
 
-"""
-Menu principal
-"""
-while True:
-    printMenu()
-    inputs = input('Seleccione una opción para continuar\n')
-    if int(inputs[0]) == 1:
-        print("Cargando información de los archivos ....")
-        bk, at, tg, bktg = loadData(control)
-        print('Libros cargados: ' + str(bk))
-        print('Autores cargados: ' + str(at))
-        print('Géneros cargados: ' + str(tg))
-        print('Asociación de Géneros a Libros cargados: ' +
-              str(bktg))
 
-    elif int(inputs[0]) == 2:
-        number = input("Buscando los TOP ?: ")
-        books = controller.getBestBooks(control, int(number))
-        printBestBooks(books)
+# main del ejercicio
+if __name__ == "__main__":
 
-    elif int(inputs[0]) == 3:
-        authorname = input("Nombre del autor a buscar: ")
-        author = controller.getBooksByAuthor(control, authorname)
-        printAuthorData(author)
+    """
+    Menu principal
+    """
+    working = True
+    #ciclo del menu
+    while working:
+        printMenu()
+        inputs = input('Seleccione una opción para continuar\n')
+        if int(inputs[0]) == 1:
+            print("Cargando información de los archivos ....")
+            bk, at, tg, bktg = loadData(control)
+            print('Libros cargados: ' + str(bk))
+            print('Autores cargados: ' + str(at))
+            print('Géneros cargados: ' + str(tg))
+            print('Asociación de Géneros a Libros cargados: ' +
+                  str(bktg))
 
-    elif int(inputs[0]) == 4:
-        label = input("Etiqueta a buscar: ")
-        book_count = controller.countBooksByTag(control, label)
-        print('Se encontraron: ', book_count, ' Libros')
+        elif int(inputs[0]) == 2:
+            number = input("Buscando los TOP ?: ")
+            books = controller.getBestBooks(control, int(number))
+            printBestBooks(books)
 
-    elif int(inputs[0]) == 0:
-        sys.exit(0)
+        elif int(inputs[0]) == 3:
+            authorname = input("Nombre del autor a buscar: ")
+            author = controller.getBooksByAuthor(control, authorname)
+            printAuthorData(author)
 
-    else:
-        continue
-sys.exit(0)
+        elif int(inputs[0]) == 4:
+            label = input("Etiqueta a buscar: ")
+            book_count = controller.countBooksByTag(control, label)
+            print('Se encontraron: ', book_count, ' Libros')
+
+        elif int(inputs[0]) == 0:
+            working = False
+            print("\nGracias por utilizar el programa.")
+
+        else:
+            continue
+    sys.exit(0)
