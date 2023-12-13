@@ -9,7 +9,7 @@ from DISClib.ADT.lists import translate
 # antigua implementacion
 # import config as cf
 # from DISClib.ADT import list as lt
-# from DISClib.Algorithms.Sorting import shellsort as sa
+from DISClib.Algorithms.Sorting import shellsort as sa
 # assert cf
 
 """
@@ -26,26 +26,25 @@ def new_catalog() -> dict:
 
     Returns:
         dict: _description_
-    """ 
-    
+    """
     catalog = {
         "books": None,
         "authors": None,
         "tags": None,
         "book_tags": None
     }
-    
+
     catalog["books"] = List(dstruct="ArrayList")
     catalog["authors"] = List(dstruct="SingleLinked",
                               cmp_function=cmp_authors)
     catalog["tags"] = List(dstruct="SingleLinked",
-                            cmp_function=cmp_tag_names)
+                           cmp_function=cmp_tag_names)
     catalog["book_tags"] = List()
     return catalog
 
 
 # funciones para comparar elementos dentro de las listas
-def cmp_authors(author_name1:str, author2:dict) -> int:
+def cmp_authors(author_name1: str, author2: dict) -> int:
     """cmp_authors _summary_
 
     Args:
@@ -54,7 +53,7 @@ def cmp_authors(author_name1:str, author2:dict) -> int:
 
     Returns:
         int: _description_
-    """  
+    """
     if author_name1.lower() == author2["name"].lower():
         return 0
     elif author_name1.lower() > author2["name"].lower():
@@ -62,7 +61,7 @@ def cmp_authors(author_name1:str, author2:dict) -> int:
     return -1
 
 
-def cmp_tag_names(tag_name1:str, tag2:dict) -> int:
+def cmp_tag_names(tag_name1: str, tag2: dict) -> int:
     """cmp_tag_names _summary_
 
     Args:
@@ -81,7 +80,7 @@ def cmp_tag_names(tag_name1:str, tag2:dict) -> int:
 
 
 # Funciones para agregar informacion al catalogo
-def add_book(catalog:dict, book:dict) -> dict:
+def add_book(catalog: dict, book: dict) -> dict:
     """add_book _summary_
 
     Args:
@@ -90,7 +89,7 @@ def add_book(catalog:dict, book:dict) -> dict:
 
     Returns:
         dict: _description_
-    """ 
+    """
     # TODO add docstring
     books_lt = catalog["books"]
     books_lt.add_last(book)
@@ -110,7 +109,8 @@ def add_book(catalog:dict, book:dict) -> dict:
 #         addBookAuthor(catalog, author.strip(), book)
 #     return catalog
 
-def add_book_author(catalog:dict, author_name:str, book:dict) -> dict:
+
+def add_book_author(catalog: dict, author_name: str, book: dict) -> dict:
     """add_book_author _summary_
 
     Args:
@@ -132,23 +132,24 @@ def add_book_author(catalog:dict, author_name:str, book:dict) -> dict:
     author["books"].add_last(book)
     return catalog
 
-def addBookAuthor(catalog, authorname, book):
-    """
-    Adiciona un autor a lista de autores, la cual guarda referencias
-    a los libros de dicho autor
-    """
-    authors = catalog['authors']
-    posauthor = lt.isPresent(authors, authorname)
-    if posauthor > 0:
-        author = lt.getElement(authors, posauthor)
-    else:
-        author = newAuthor(authorname)
-        lt.addLast(authors, author)
-    lt.addLast(author['books'], book)
-    return catalog
+
+# def addBookAuthor(catalog, authorname, book):
+#     """
+#     Adiciona un autor a lista de autores, la cual guarda referencias
+#     a los libros de dicho autor
+#     """
+#     authors = catalog['authors']
+#     posauthor = lt.isPresent(authors, authorname)
+#     if posauthor > 0:
+#         author = lt.getElement(authors, posauthor)
+#     else:
+#         author = newAuthor(authorname)
+#         lt.addLast(authors, author)
+#     lt.addLast(author['books'], book)
+#     return catalog
 
 
-def add_tag(catalog:dict, tag:dict) -> dict:
+def add_tag(catalog: dict, tag: dict) -> dict:
     """add_tag _summary_
 
     Args:
@@ -174,7 +175,7 @@ def add_tag(catalog:dict, tag:dict) -> dict:
 #     return catalog
 
 
-def add_book_tag(catalog:dict, book_tag:dict) -> dict:
+def add_book_tag(catalog: dict, book_tag: dict) -> dict:
     """add_book_tag _summary_
 
     Args:
@@ -201,7 +202,7 @@ def add_book_tag(catalog:dict, book_tag:dict) -> dict:
 
 # Funciones para creacion de datos
 
-def new_author(author_name:str) -> dict:
+def new_author(author_name: str) -> dict:
     """new_author _summary_
 
     Args:
@@ -232,7 +233,7 @@ def new_author(author_name:str) -> dict:
 #     return author
 
 
-def new_tag(tag_name:str, tag_id:str) -> dict:
+def new_tag(tag_name: str, tag_id: str) -> dict:
     """new_tag _summary_
 
     Args:
@@ -262,7 +263,7 @@ def new_tag(tag_name:str, tag_id:str) -> dict:
 #     return tag
 
 
-def new_book_tag(tag_id:str, book_id:str) -> dict:
+def new_book_tag(tag_id: str, book_id: str) -> dict:
     """new_book_tag _summary_
 
     Args:
@@ -271,7 +272,7 @@ def new_book_tag(tag_id:str, book_id:str) -> dict:
 
     Returns:
         dict: _description_
-    """  
+    """
     # TODO add docstring
     book_tag = {
         "tag_id": "",
@@ -294,7 +295,7 @@ def new_book_tag(tag_id:str, book_id:str) -> dict:
 # Funciones de consulta
 
 
-def get_books_by_author(catalog:dict, author_name:str) -> List:
+def get_books_by_author(catalog: dict, author_name: str) -> List:
     """get_books_by_author _summary_
 
     Args:
@@ -313,7 +314,6 @@ def get_books_by_author(catalog:dict, author_name:str) -> List:
     return None
 
 
-
 # def getBooksByAuthor(catalog, authorname):
 #     """
 #     Retorna un autor con sus libros a partir del nombre del autor
@@ -324,8 +324,7 @@ def get_books_by_author(catalog:dict, author_name:str) -> List:
 #         return author
 #     return None
 
-
-def get_best_books(catalog:dict, number:int) -> List:
+def get_best_books(catalog: dict, number: int) -> List:
     """get_best_books _summary_
 
     Args:
@@ -344,7 +343,6 @@ def get_best_books(catalog:dict, number:int) -> List:
             best_books_lt.add_last(book)
             i += 1
         # best_books_lt.add_last(book)
-    
     return best_books_lt
 
 
@@ -360,7 +358,7 @@ def get_best_books(catalog:dict, number:int) -> List:
 #     return bestbooks
 
 
-def count_books_by_tag(catalog:dict, tag:str) -> int:
+def count_books_by_tag(catalog: dict, tag: str) -> int:
     """count_books_by_tag _summary_
 
     Args:
@@ -379,7 +377,7 @@ def count_books_by_tag(catalog:dict, tag:str) -> int:
         tag = tags_lt.get_element(idx_tag)
         for book_tag in book_tags_lt:
             if book_tag["tag_id"] == tag["tag_id"]:
-                book_count += 1        
+                book_count += 1
     return book_count
 
 
@@ -399,7 +397,7 @@ def count_books_by_tag(catalog:dict, tag:str) -> int:
 #     return bookcount
 
 
-def books_size(catalog:dict) -> int:
+def books_size(catalog: dict) -> int:
     """books_size _summary_
 
     Args:
@@ -413,7 +411,7 @@ def books_size(catalog:dict) -> int:
     return books_lt.size()
 
 
-def authors_size(catalog:dict) -> int:
+def authors_size(catalog: dict) -> int:
     """authors_size _summary_
 
     Args:
@@ -427,7 +425,7 @@ def authors_size(catalog:dict) -> int:
     return authors_lt.size()
 
 
-def tags_size(catalog:dict) -> int:
+def tags_size(catalog: dict) -> int:
     """tags_size _summary_
 
     Args:
@@ -435,13 +433,13 @@ def tags_size(catalog:dict) -> int:
 
     Returns:
         int: _description_
-    """    
+    """
     # TODO add docstring
     tags_lt = catalog["tags"]
     return tags_lt.size()
 
 
-def book_tags_size(catalog:dict) -> int:
+def book_tags_size(catalog: dict) -> int:
     """book_tags_size _summary_
 
     Args:
@@ -491,7 +489,7 @@ def book_tags_size(catalog:dict) -> int:
 
 # funciones para comparar elementos dentro de algoritmos de ordenamientos
 
-def rating_criteria(book1:dict, book2:dict) -> bool:
+def rating_criteria(book1: dict, book2: dict) -> bool:
     """rating_criteria _summary_
 
     Args:
@@ -503,7 +501,8 @@ def rating_criteria(book1:dict, book2:dict) -> bool:
     """    
     return (float(book1["average_rating"]) > float(book2["average_rating"]))
 
-def sort_books(catalog:dict) -> dict:
+
+def sort_books(catalog: dict) -> dict:
     """sort_books _summary_
 
     Args:
@@ -511,11 +510,12 @@ def sort_books(catalog:dict) -> dict:
 
     Returns:
         dict: _description_
-    """    
+    """
     # TODO add docstring
     books_lt = catalog["books"]
     sa.sort(books_lt, rating_criteria)
     return catalog
+
 
 # def compareratings(book1, book2):
 #     return (float(book1['average_rating']) > float(book2['average_rating']))
