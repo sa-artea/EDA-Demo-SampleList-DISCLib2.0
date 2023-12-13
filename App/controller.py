@@ -42,7 +42,7 @@ def loadBooks(catalog):
     cada uno de ellos, se crea en la lista de autores, a dicho autor y una
     referencia al libro que se esta procesando.
     """
-    booksfile = cf.data_dir + 'GoodReads/books-small.csv'
+    booksfile = cf.data_dir + 'GoodReads/books.csv'
     input_file = csv.DictReader(open(booksfile, encoding='utf-8'))
     for book in input_file:
         # model.addBook(catalog, book)
@@ -69,15 +69,15 @@ def format_book(book):
         "ratings_4",
         "ratings_5",
     ]
-    
+
     big_int_key_lt = [
         "isbn13",
     ]
-    
+
     float_key_lt = [
         "average_rating",
     ]
-    
+
     str_key_lt = [
         "authors",
         "original_title",
@@ -89,19 +89,19 @@ def format_book(book):
         "image_url",
         "small_image_url",
     ]
-    
+
     for key in int_key_lt:
         book[key] = int(book[key])
-    
+
     for key in big_int_key_lt:
         book[key] = int(float(book[key]))
-    
+
     for key in float_key_lt:
         book[key] = float(book[key])
-        
+  
     for key in str_key_lt:
         book[key] = str(book[key])
-    
+
     return book
 
 
@@ -122,7 +122,7 @@ def loadBooksTags(catalog):
     """
     Carga la información que asocia tags con libros.
     """
-    booktagsfile = cf.data_dir + 'GoodReads/book_tags-small.csv'
+    booktagsfile = cf.data_dir + 'GoodReads/book_tags.csv'
     input_file = csv.DictReader(open(booktagsfile, encoding='utf-8'))
     for booktag in input_file:
         # model.addBookTag(catalog, booktag)
