@@ -26,9 +26,7 @@
  """
 
 
-import config as cf
-from DISClib.ADT import list as lt
-assert cf
+from DISClib.ADT import lists as lt
 
 """
 Implementación del algoritmo shellsort, basado en
@@ -40,6 +38,12 @@ Se utiliza la secuencia de incrementos 3x+1: 1, 4, 13, 40, 121, 364, 1093,
 (D. Knuth)
 Sedgewick: 1,5,19,41,109,209,929,2161,...
 """
+
+# FIXME: pasar a snake_case de python
+# FIXME: cambiar pruebas unitarias de acuerdo a los cambios realizados
+# TODO: tipar datos de entrada y salida de cada funcion
+# TODO: agregar manejo de excepciones a la funcion
+# TODO agregar descricion del algoritmo en cada funcion
 
 
 def sort(lst, sort_crit):

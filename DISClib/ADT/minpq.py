@@ -24,10 +24,10 @@
  *
  """
 
-import config
-from DISClib.Utils import error as error
+# from DISClib.Utils import error as error
+from DISClib.Utils.error import error_handler
+from DISClib.Utils.error import init_type_checker
 from DISClib.DataStructures import heap as h
-assert config
 
 
 """
@@ -39,6 +39,11 @@ Algorithms, 4th Edition
 """
 
 
+# *TODOs GENERALES
+# TODO: Especifiar los tipos de errores en lugar del error base: Exception
+# TODO: Actualizar las pruebas unitarias luego de realizar los cambios
+# FIXME: Mantener la consistnecia entre de tipos en el return (heap -> MinPQ)
+# FIXME: Cambiar el nombre de la función a snake_case
 def newMinPQ(cmpfunction):
     """
     Crea un cola de prioridad orientada a menor
@@ -76,6 +81,8 @@ def size(minpq):
         error.reraise(exp, 'minpq:size')
 
 
+# FIXME: Cambiar el nombre de la función a snake_case
+# TODO: especificar en la función el tipo de retorno a boolean
 def isEmpty(minpq):
     """
     Indica si la MinPQ está vacía
@@ -130,6 +137,7 @@ def insert(minpq, element):
         error.reraise(exp, 'minpq:insert')
 
 
+# FIXME: Cambiar el nombre de la función a snake_case
 def delMin(minpq):
     """
     Retorna el menor elemento de la MinPQ y lo elimina.

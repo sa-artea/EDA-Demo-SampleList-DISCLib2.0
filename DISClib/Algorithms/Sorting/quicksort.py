@@ -25,9 +25,7 @@
  *
  """
 
-import config as cf
-from DISClib.ADT import list as lt
-assert cf
+from DISClib.ADT import lists as lt
 
 """
   Los algoritmos de este libro están basados en la implementación
@@ -35,7 +33,13 @@ assert cf
   Algorithms, 4th Edition
 """
 
+# FIXME: pasar a snake_case de python
+# FIXME: cambiar pruebas unitarias de acuerdo a los cambios realizados
 
+
+# FIXME: tipar entradas y salidas de la funcion
+# TODO agregar manejo de excepciones a la funcion
+# TODO mejorar la descricion de la funcion
 def partition(lst, lo, hi, sort_crit):
     """
     Función que va dejando el pivot en su lugar, mientras mueve
@@ -53,6 +57,9 @@ def partition(lst, lo, hi, sort_crit):
     return follower
 
 
+# FIXME: tipar entradas y salidas de la funcion
+# TODO agregar manejo de excepciones a la funcion
+# TODO mejorar la descricion de la funcion
 def quicksort(lst, lo, hi, sort_crit):
     """
     Se localiza el pivot, utilizando la funcion de particion.
@@ -66,6 +73,9 @@ def quicksort(lst, lo, hi, sort_crit):
     quicksort(lst, pivot+1, hi, sort_crit)
 
 
+# FIXME: tipar entradas y salidas de la funcion
+# TODO agregar manejo de excepciones a la funcion
+# TODO mejorar la descricion de la funcion
 def sort(lst, sort_crit):
     quicksort(lst, 1, lt.size(lst), sort_crit)
     return lst

@@ -1,4 +1,5 @@
 """
+ # TODO cambiar comentarios de lincencia segun estandard del equipo
  * Copyright 2020, Departamento de sistemas y Computación,
  * Universidad de Los Andes
  *
@@ -24,18 +25,24 @@
  *
  """
 
-import config
+# FIXME agregar el manejo de excepciones de la libreria
+# TODO crear consistencia en para importar modulos
 import importlib
-assert config
 
 """
 Este archivo contiene la implementación del TAD grafo no dirigido
 """
 
 
+# FIXME cambiar a SnakeCase el formato de funciones y variables
+# TODO agregar anotaciones para documentacion automatica
+# TODO implementar matriz de adyacencia ADJ_MATRIX
+# TODO permitir utilizar nodos con cualquier tipo de dato
+# TODO permitir utilizar nodos paralelos y autoreferencias
 def newGraph(datastructure="ADJ_LIST",
              directed=False,
              size=10,
+             # FIXME cambiar el nombre de la funcion de comparacion
              cmpfunction=None
              ):
     """
@@ -51,6 +58,8 @@ def newGraph(datastructure="ADJ_LIST",
     Raises:
         Exception
     """
+    # FIXME falta agregar el manejo de excepciones
+    # TODO agregar tipos de datos para input y output
     gr = graphSelector(datastructure)
     return gr.newGraph(size, cmpfunction,  directed, datastructure, gr)
 
@@ -67,6 +76,9 @@ def insertVertex(graph, vertex):
     Raises:
         Exception
     """
+    # FIXME falta agregar el manejo de excepciones
+    # TODO revisar si es necesario el return
+    # TODO agregar tipos de datos para input y output
     return graph['datastructure'].insertVertex(graph, vertex)
 
 
@@ -82,6 +94,9 @@ def removeVertex(graph, vertex):
     Raises:
         Exception
     """
+    # FIXME falta agregar el manejo de excepciones
+    # TODO revisar si es necesario el return
+    # TODO agregar tipos de datos para input y output
     return graph['datastructure'].removeVertex(graph, vertex)
 
 
@@ -97,6 +112,8 @@ def numVertices(graph):
     Raises:
         Exception
     """
+    # FIXME falta agregar el manejo de excepciones
+    # TODO agregar tipos de datos para input y output
     return graph['datastructure'].numVertices(graph)
 
 
@@ -112,6 +129,8 @@ def numEdges(graph):
     Raises:
         Exception
     """
+    # FIXME falta agregar el manejo de excepciones
+    # TODO agregar tipos de datos para input y output
     return graph['datastructure'].numEdges(graph)
 
 
@@ -126,6 +145,8 @@ def vertices(graph):
     Raises:
         Exception
     """
+    # FIXME falta agregar el manejo de excepciones
+    # TODO agregar tipos de datos para input y output
     return graph['datastructure'].vertices(graph)
 
 
@@ -141,6 +162,8 @@ def edges(graph):
     Raises:
         Exception
     """
+    # FIXME falta agregar el manejo de excepciones
+    # TODO agregar tipos de datos para input y output
     return graph['datastructure'].edges(graph)
 
 
@@ -157,6 +180,8 @@ def degree(graph, vertex):
     Raises:
         Exception
     """
+    # FIXME falta agregar el manejo de excepciones
+    # TODO agregar tipos de datos para input y output
     return graph['datastructure'].degree(graph, vertex)
 
 
@@ -173,6 +198,8 @@ def outdegree(graph, vertex):
     Raises:
         Exception
     """
+    # FIXME falta agregar el manejo de excepciones
+    # TODO agregar tipos de datos para input y output
     return graph['datastructure'].outdegree(graph, vertex)
 
 
@@ -189,6 +216,8 @@ def indegree(graph, vertex):
     Raises:
         Exception
     """
+    # FIXME falta agregar el manejo de excepciones
+    # TODO agregar tipos de datos para input y output
     return graph['datastructure'].indegree(graph, vertex)
 
 
@@ -206,6 +235,8 @@ def getEdge(graph, vertexa, vertexb):
     Raises:
         Exception
     """
+    # FIXME falta agregar el manejo de excepciones
+    # TODO agregar tipos de datos para input y output
     return graph['datastructure'].getEdge(graph, vertexa, vertexb)
 
 
@@ -227,6 +258,9 @@ def addEdge(graph, vertexa, vertexb, weight=0):
     Raises:
         Exception
     """
+    # FIXME falta agregar el manejo de excepciones
+    # TODO revisar si es necesario el return
+    # TODO agregar tipos de datos para input y output
     return graph['datastructure'].addEdge(graph, vertexa, vertexb, weight)
 
 
@@ -243,6 +277,8 @@ def containsVertex(graph, vertex):
     Raises:
         Exception
     """
+    # FIXME falta agregar el manejo de excepciones
+    # TODO agregar tipos de datos para input y output
     return graph['datastructure'].containsVertex(graph, vertex)
 
 
@@ -259,6 +295,8 @@ def adjacents(graph, vertex):
     Raises:
         Exception
     """
+    # FIXME falta agregar el manejo de excepciones
+    # TODO agregar tipos de datos para input y output
     return graph['datastructure'].adjacents(graph, vertex)
 
 
@@ -276,6 +314,8 @@ def adjacentEdges(graph, vertex):
     Raises:
         Exception
     """
+    # FIXME falta agregar el manejo de excepciones
+    # TODO agregar tipos de datos para input y output
     return graph['datastructure'].adjacentEdges(graph, vertex)
 
 
@@ -294,6 +334,8 @@ def graphSelector(datastructure):
     Carga dinamicamente el import de la estructura de datos
     seleccionada
     """
+    # FIXME falta agregar el manejo de excepciones
+    # TODO agregar tipos de datos para input y output
     ds = switch_module.get(datastructure)
     module = importlib.import_module(ds, package="DISClib.DataStructures")
     return module

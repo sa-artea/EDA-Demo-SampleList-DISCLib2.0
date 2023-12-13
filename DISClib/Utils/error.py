@@ -1,34 +1,30 @@
 """
- * Copyright 2020, Departamento de sistemas y Computación
- * Universidad de Los Andes
- *
- *
- * Desarrolado para el curso ISIS1225 - Estructuras de Datos y Algoritmos
- *
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- """
+Módulo para manejar errores genéricos en los ADTs y todo *DISCLib*.
 
+*IMPORTANTE:* Este código y sus especificaciones para Python están basados en las implementaciones propuestas por los siguientes autores/libros:
+
+    #. Algorithms, 4th Edition, Robert Sedgewick y Kevin Wayne.
+    #. Data Structure and Algorithms in Python, M.T. Goodrich, R. Tamassia, M.H. Goldwasser.
 """
-  Estructura utilizada para el manejo de los errores durante la manipulación
-  de estructuras de datos y TADs
-"""
+# native python modules
+# import typing for defining the type of the elements
+
+# custom modules
+# import global variables
 
 
-def reraise(excp, *args):
+def error_handler(context: str,
+                  func_name: str,
+                  err: Exception) -> None:
+    """*error_handler()* recibe el contexto, nombre de la función y la excepción para lanzar un mensaje de error detallado y el traceback.
+
+    Args:
+        context (str): nombre del contexto donde ocurrió el error.
+        func_name (str): nombre de la función donde ocurrió el error.
+        err (Exception): excepción lanzada.
+
+    Raises:
+        type: excepción con el mensaje de error detallado y el traceback.
     """
-    Estructura que contiene la información a guardar en una lista encadenada
-    """
-    excp.args = args + excp.args
-    raise excp.with_traceback(excp.__traceback__)
+    err_msg = f"Error in {context}.{func_name}: {err}"
+    raise type(err)(err_msg).with_traceback(err.__traceback__)

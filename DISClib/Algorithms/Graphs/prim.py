@@ -1,3 +1,5 @@
+
+
 """
  * Copyright 2020, Departamento de sistemas y Computación,
  * Universidad de Los Andes
@@ -25,18 +27,24 @@
 """
 
 
-import config
 from DISClib.DataStructures import edge as e
-from DISClib.ADT import list as lt
+from DISClib.ADT import lists as lt
 from DISClib.ADT import indexminpq as pq
 from DISClib.ADT import queue as q
-from DISClib.ADT import map as map
+from DISClib.ADT import maps as map
 from DISClib.ADT import graph as g
 from DISClib.Utils import error as error
 import math
-assert config
 
 
+""" Cambios generales """
+# FIXME Pasar los mombres de las funciones a snake_case
+# FIXME Actualizar a las pruebas unitarias en base a los cambios realizados
+# TODO Documentar el tipo de datos de las variables de entrada de cada funcion
+# TODO Mejorar las excepciones de las funciones para que sean mas especificas
+
+
+# FIXME Especificar los tipos de datos  en los parametros y retorno
 def PrimMST(graph, origin=None):
     """
     Implementa el algoritmo de Prim
@@ -56,13 +64,14 @@ def PrimMST(graph, origin=None):
             if pos != 0:
                 lt.exchange(vertices, 1, pos)
         for vert in lt.iterator(vertices):
-            if not map.get(search['marked'], vert)['value']:
+            if not map.get(search["marked"], vert)["value"]:
                 prim(graph, search, vert)
         return search
     except Exception as exp:
-        error.reraise(exp, 'prim:PrimMST')
+        error.reraise(exp, "prim:PrimMST")
 
 
+# FIXME Cambiar las variables para no usar nombres reservados en python
 def prim(graph, search, v):
     """
     Args:
@@ -74,14 +83,14 @@ def prim(graph, search, v):
         Exception
     """
     try:
-        map.put(search['distTo'], v, 0.0)
-        pq.insert(search['pq'], v, 0.0)
-        while (not pq.isEmpty(search['pq'])):
-            min = pq.delMin(search['pq'])
+        map.put(search["distTo"], v, 0.0)
+        pq.insert(search["pq"], v, 0.0)
+        while not pq.isEmpty(search["pq"]):
+            min = pq.delMin(search["pq"])
             scan(graph, search, min)
         return search
     except Exception as exp:
-        error.reraise(exp, 'prim:prim')
+        error.reraise(exp, "prim:prim")
 
 
 def scan(graph, search, vertex):
@@ -96,25 +105,30 @@ def scan(graph, search, vertex):
         Exception
     """
     try:
-        map.put(search['marked'], vertex, True)
+        map.put(search["marked"], vertex, True)
         edges = g.adjacentEdges(graph, vertex)
         for edge in lt.iterator(edges):
             w = e.other(edge, vertex)
-            if (not map.get(search['marked'], w)['value']):
-                if (e.weight(edge) < map.get(search['distTo'], w)['value']):
-                    map.put(search['distTo'], w, e.weight(edge))
-                    map.put(search['edgeTo'], w, edge)
-                    if (pq.contains(search['pq'], w)):
-                        pq.decreaseKey(search['pq'], w,
-                                       map.get(search['distTo'], w)['value'])
+            if not map.get(search["marked"], w)["value"]:
+                if e.weight(edge) < map.get(search["distTo"], w)["value"]:
+                    map.put(search["distTo"], w, e.weight(edge))
+                    map.put(search["edgeTo"], w, edge)
+                    if pq.contains(search["pq"], w):
+                        pq.decreaseKey(search["pq"],
+                                       w,
+                                       map.get(search["distTo"], w)["value"]
+                                       )
                     else:
-                        pq.insert(search['pq'], w,
-                                  map.get(search['distTo'], w)['value'])
+                        pq.insert(
+                                  search["pq"],
+                                  w, map.get(search["distTo"], w)["value"]
+                                  )
         return search
     except Exception as exp:
-        error.reraise(exp, 'prim:scan')
+        error.reraise(exp, "prim:scan")
 
 
+# FIXME Cambiar "pila" por "cola" en la documentacion del return
 def edgesMST(graph, search):
     """
     Args:
@@ -128,18 +142,18 @@ def edgesMST(graph, search):
     try:
         vertices = g.vertices(graph)
         for vert in lt.iterator(vertices):
-            e = map.get(search['edgeTo'], vert)
-            if (e is not None):
-                q.enqueue(search['mst'], e['value'])
+            e = map.get(search["edgeTo"], vert)
+            if e is not None:
+                q.enqueue(search["mst"], e["value"])
         return search
     except Exception as exp:
-        error.reraise(exp, 'prim:edgesMST')
+        error.reraise(exp, "prim:edgesMST")
 
 
 def weightMST(graph, search):
     weight = 0.0
     edgesMST(graph, search)
-    edges = search['mst']
+    edges = search["mst"]
     for edge in lt.iterator(edges):
         weight = weight + e.weight(edge)
     return weight
@@ -160,36 +174,42 @@ def initSearch(graph):
     """
     try:
         search = {
-               'edgeTo': None,
-               'distTo': None,
-               'marked': None,
-               'pq': None,
-               'mst': None
-             }
+            "edgeTo": None,
+            "distTo": None,
+            "marked": None,
+            "pq": None,
+            "mst": None,
+        }
 
-        search['edgeTo'] = map.newMap(numelements=g.numVertices(graph),
-                                      maptype='PROBING',
-                                      cmpfunction=graph['cmpfunction']
-                                      )
+        # FIXME Mejorar la mantenibilidad evitando duplicidad de este codigo
 
-        search['distTo'] = map.newMap(numelements=g.numVertices(graph),
-                                      maptype='PROBING',
-                                      cmpfunction=graph['cmpfunction'])
+        search["edgeTo"] = map.newMap(
+            numelements=g.numVertices(graph),
+            maptype="PROBING",
+            cmpfunction=graph["cmpfunction"],
+        )
 
-        search['marked'] = map.newMap(numelements=g.numVertices(graph),
-                                      maptype='PROBING',
-                                      cmpfunction=graph['cmpfunction']
-                                      )
+        search["distTo"] = map.newMap(
+            numelements=g.numVertices(graph),
+            maptype="PROBING",
+            cmpfunction=graph["cmpfunction"],
+        )
+
+        search["marked"] = map.newMap(
+            numelements=g.numVertices(graph),
+            maptype="PROBING",
+            cmpfunction=graph["cmpfunction"],
+        )
 
         vertices = g.vertices(graph)
         for vert in lt.iterator(vertices):
-            map.put(search['distTo'], vert, math.inf)
-            map.put(search['marked'], vert, False)
+            map.put(search["distTo"], vert, math.inf)
+            map.put(search["marked"], vert, False)
 
-        search['pq'] = pq.newIndexMinPQ(cmpfunction=graph['cmpfunction'])
-        search['mst'] = q.newQueue()
+        search["pq"] = pq.newIndexMinPQ(cmpfunction=graph["cmpfunction"])
+        search["mst"] = q.newQueue()
 
         return search
 
     except Exception as exp:
-        error.reraise(exp, 'prim:init')
+        error.reraise(exp, "prim:init")

@@ -1,61 +1,76 @@
 """
- * Copyright 2020, Departamento de sistemas y Computación,
- * Universidad de Los Andes
- *
- *
- * Desarrolado para el curso ISIS1225 - Estructuras de Datos y Algoritmos
- *
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- * Contribución de:
- *
- * Dario Correal
- *
- """
+Estos ADTs representan los nodos para una lista sencillamente encadenada (SingleNode) y una lista doblemente encadenada (DoubleNode).
 
-"""
-  Estructura que contiene la información a guardar en una lista encadenada
+Estos nodos se utilizan respectivamente en las estructuras dinámicas de lista sencillamente encadenada (LinkedList) y lista doblemente encadenadA(DoubleLinkedList). Las cuales NO tienen un tamaño fijo y pueden crecer indefinidamente en la memoria disponible.
+
+*IMPORTANTE:* Este código y sus especificaciones para Python están basados en las implementaciones propuestas por los siguientes autores/libros:
+
+    #. Algorithms, 4th Edition, Robert Sedgewick y Kevin Wayne.
+    #. Data Structure and Algorithms in Python, M.T. Goodrich, R. Tamassia, M.H. Goldwasser.
 """
 
+# native python modules
+# import dataclass for defining the node class
+from dataclasses import dataclass
+# import modules for defining the Node type
+from typing import Generic, Optional
 
-def newSingleNode(element):
-    """
-    Estructura que contiene la información a guardar en una lista encadenada
-    """
-    node = {'info': element, 'next': None}
-    return(node)
+# custom modules
+# generic error handling and type checking
+from DISClib.Utils.error import error_handler
+from DISClib.Utils.default import T
+from DISClib.DataStructures.node import Node
+
+# checking custom modules
+assert error_handler
+assert T
 
 
-def getElement(node):
-    """
-    Retorna la información de un nodo
+@dataclass
+class SingleNode(Node, Generic[T]):
+    """**SingleNode** ADT que representa un nodo de una lista sencillamente encadenada. Basada en el ADT Node que contiene la información del nodo.
+
     Args:
-      node: El nodo a examinar
+        Node (dataclass): ADT base para implementar un nodo con información genérica.
+        Generic (T): TAD (Tipo Abstracto de Datos) o ADT (Abstract Data Type) para una estructura de datos genéricas en python.
+
     Returns:
-      La información almacenada en el nodo
+        SingleNode: ADT para un nodo de una lista sencillamente encadenada.
     """
-    return node['info']
+    # optional reference to the next node of the same type
+    # :attr: _next
+    _next: Optional["SingleNode[T]"] = None
+    """Referencia al siguiente nodo de la lista."""
+
+    def next(self) -> Optional["SingleNode[T]"]:
+        """*next()* recupera el siguiente nodo de la lista si existe.
+
+        Returns:
+            SingleNode: referencia al siguiente nodo de la lista.
+        """
+        return self._next
 
 
-def newDoubleNode(element):
+@dataclass
+class DoubleNode(SingleNode, Generic[T]):
+    """**DoubleNode** ADT que representa un nodo de una lista doblemente encadenada. Basada en el ADT Node y SingleNode.
+
+    Args:
+        SingleNode (Dataclass): ADT base para implementar un nodo de una lista sencillamente encadenada.
+        Generic (T): TAD (Tipo Abstracto de Datos) o ADT (Abstract Data Type) para una estructura de datos genéricas en python.
+
+    Returns:
+        DoubleNode: ADT para un nodo de una lista doblemente encadenada.
     """
-    Estructura que contiene la información a guardar en una lista encadenada
-    doblemente
-    """
-    node = {'info': element,
-            'next': None,
-            'prev': None
-            }
-    return node
+    # optional reference to the previous node of the same type
+    # :attr: _prev
+    _prev: Optional["DoubleNode[T]"] = None
+    """Referencia al nodo anterior de la lista."""
+
+    def prev(self) -> Optional["DoubleNode[T]"]:
+        """*prev()* recupera el nodo anterior de la lista si existe.
+
+        Returns:
+            _type_: referencia al nodo anterior de la lista.
+        """
+        return self._prev

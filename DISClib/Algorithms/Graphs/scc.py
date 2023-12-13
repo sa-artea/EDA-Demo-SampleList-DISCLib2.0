@@ -24,14 +24,19 @@
  *
  """
 
-import config
-from DISClib.ADT import list as lt
+from DISClib.ADT import lists as lt
 from DISClib.ADT import graph as g
 from DISClib.ADT import stack
 from DISClib.Algorithms.Graphs import dfo
 from DISClib.Utils import error as error
-from DISClib.ADT import map
-assert config
+from DISClib.ADT import maps
+
+
+""" Cambios generales """
+# FIXME Pasar los mombres de las funciones a snake_case
+# FIXME Actualizar a las pruebas unitarias en base a los cambios realizados
+# TODO Documentar el tipo de datos de las variables de entrada de cada funcion
+# TODO Mejorar las excepciones de las funciones para que sean mas especificas
 
 
 def KosarajuSCC(graph):
@@ -49,58 +54,66 @@ def KosarajuSCC(graph):
     """
     try:
         scc = {
-                'idscc': None,
-                'marked': None,
-                'grmarked': None,
-                'components': 0
-            }
+            "idscc": None,
+            "marked": None,
+            "grmarked": None,
+            "components": 0,
+        }
 
-        scc['idscc'] = map.newMap(g.numVertices(graph),
-                                  maptype='PROBING',
-                                  cmpfunction=graph['cmpfunction']
-                                  )
+        # FIXME Evitar duplicidad de codigo en la creacion de los mapas
 
-        scc['marked'] = map.newMap(g.numVertices(graph), maptype='PROBING',
-                                   cmpfunction=graph['cmpfunction']
-                                   )
-        scc['grmarked'] = map.newMap(g.numVertices(graph), maptype='PROBING',
-                                     cmpfunction=graph['cmpfunction']
-                                     )
+        scc["idscc"] = map.newMap(
+            g.numVertices(graph),
+            maptype="PROBING",
+            cmpfunction=graph["cmpfunction"],
+        )
+
+        scc["marked"] = map.newMap(
+            g.numVertices(graph),
+            maptype="PROBING",
+            cmpfunction=graph["cmpfunction"],
+        )
+        scc["grmarked"] = map.newMap(
+            g.numVertices(graph),
+            maptype="PROBING",
+            cmpfunction=graph["cmpfunction"],
+        )
 
         # Se calcula el grafo reverso de graph
         greverse = reverseGraph(graph)
 
         # Se calcula el DFO del reverso de graph
         dforeverse = dfo.DepthFirstOrder(greverse)
-        grevrevpost = dforeverse['reversepost']
+        grevrevpost = dforeverse["reversepost"]
 
         # Se recorre el grafo en el orden dado por reversepost (G-reverso)
-        scc['components'] = 0
-        while (not stack.isEmpty(grevrevpost)):
+        scc["components"] = 0
+        while not stack.isEmpty(grevrevpost):
             vert = stack.pop(grevrevpost)
-            if not map.contains(scc['marked'], vert):
-                scc['components'] += 1
+            if not map.contains(scc["marked"], vert):
+                scc["components"] += 1
                 sccCount(graph, scc, vert)
         return scc
     except Exception as exp:
-        error.reraise(exp, 'scc:Kosaraju')
+        error.reraise(exp, "scc:Kosaraju")
 
 
+# FIXME Documentar entradas y salidas de la funcion asi como las excepciones
 def sccCount(graph, scc, vert):
     """
     Este algoritmo cuenta el número de componentes conectados.
     Deja en idscc, el número del componente al que pertenece cada vértice
     """
     try:
-        map.put(scc['marked'], vert, True)
-        map.put(scc['idscc'], vert, scc['components'])
+        map.put(scc["marked"], vert, True)
+        map.put(scc["idscc"], vert, scc["components"])
         lstadjacents = g.adjacents(graph, vert)
         for adjvert in lt.iterator(lstadjacents):
-            if not map.contains(scc['marked'], adjvert):
+            if not map.contains(scc["marked"], adjvert):
                 sccCount(graph, scc, adjvert)
         return scc
     except Exception as exp:
-        error.reraise(exp, 'dfo:sccCount')
+        error.reraise(exp, "dfo:sccCount")
 
 
 def stronglyConnected(scc, verta, vertb):
@@ -108,38 +121,43 @@ def stronglyConnected(scc, verta, vertb):
     Dados dos vértices, informa si están fuertemente conectados o no.
     """
     try:
-        scca = map.get(scc['idscc'], verta)['value']
-        sccb = map.get(scc['idscc'], vertb)['value']
+        scca = map.get(scc["idscc"], verta)["value"]
+        sccb = map.get(scc["idscc"], vertb)["value"]
+        # FIXME Cambiar por return scca == sccb
         if scca == sccb:
             return True
         return False
     except Exception as exp:
-        error.reraise(exp, 'dfo:Sconnected')
+        error.reraise(exp, "dfo:Sconnected")
 
 
+# FIXME Documentar entradas y salidas de la funcion asi como las excepciones
 def connectedComponents(scc):
     """
     Retorna el numero de componentes conectados
     """
     try:
-        return scc['components']
+        return scc["components"]
     except Exception as exp:
-        error.reraise(exp, 'scc:components')
+        error.reraise(exp, "scc:components")
+
 
 # --------------------------------------------------
 #              Funciones Auxiliares
 # --------------------------------------------------
 
 
+# FIXME Documentar entradas y salidas de la funcion asi como las excepciones
 def reverseGraph(graph):
     """
-        Retornar el reverso del grafo graph
+    Retornar el reverso del grafo graph
     """
     try:
-        greverse = g.newGraph(size=g.numVertices(graph),
-                              directed=True,
-                              cmpfunction=graph['cmpfunction']
-                              )
+        greverse = g.newGraph(
+            size=g.numVertices(graph),
+            directed=True,
+            cmpfunction=graph["cmpfunction"],
+        )
 
         lstvert = g.vertices(graph)
         for vert in lt.iterator(lstvert):
@@ -151,8 +169,9 @@ def reverseGraph(graph):
                 g.addEdge(greverse, adj, vert)
         return greverse
     except Exception as exp:
-        error.reraise(exp, 'scc:reverse')
+        error.reraise(exp, "scc:reverse")
 
 
+# FIXME Documentar entradas y salidas de la funcion
 def comparenames(searchname, element):
-    return (searchname == element['key'])
+    return searchname == element["key"]

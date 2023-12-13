@@ -1,4 +1,5 @@
 """
+ # TODO cambiar comentarios de lincencia segun estandard del equipo
  * Copyright 2020, Departamento de sistemas y Computación,
  * Universidad de Los Andes
  *
@@ -23,10 +24,13 @@
  *
  """
 
-
-import config
-from DISClib.DataStructures import indexheap as h
-assert config
+# FIXME agregar el manejo de excepciones de la libreria
+# TODO crear consistencia en para importar modulos
+# from DISClib.DataStructures import indexheap as h
+# from DataStructures.indexheap import indexheap as h
+from DISClib.Utils.error import error_handler
+from DISClib.Utils.error import init_type_checker
+import DISClib.DataStructures.indexheap as h
 
 """
 Implementación de una cola de prioridad indexada orientada a menor
@@ -37,6 +41,9 @@ Algorithms, 4th Edition
 """
 
 
+# FIXME cambiar a SnakeCase el formato de funciones y variables
+# TODO agregar anotaciones para documentacion automatica
+# TODO hacer consistente la forma de crear un nuevo IndexMinPQ
 def newIndexMinPQ(cmpfunction):
     """
     Crea un cola de prioridad indexada orientada a menor
@@ -48,6 +55,8 @@ def newIndexMinPQ(cmpfunction):
     Raises:
         Exception
     """
+    # FIXME falta agregar el manejo de excepciones
+    # TODO agregar tipos de datos para input y output
     return h.newIndexHeap(cmpfunction)
 
 
@@ -62,7 +71,9 @@ def isEmpty(iminpq):
     Raises:
         Exception
     """
-    return(h.isEmpty(iminpq))
+    # FIXME falta agregar el manejo de excepciones
+    # TODO agregar tipos de datos para input y output
+    return (h.isEmpty(iminpq))
 
 
 def size(iminpq):
@@ -76,7 +87,9 @@ def size(iminpq):
     Raises:
         Exception
     """
-    return(h.size(iminpq))
+    # FIXME falta agregar el manejo de excepciones
+    # TODO agregar tipos de datos para input y output
+    return (h.size(iminpq))
 
 
 def insert(iminpq, key, index):
@@ -90,6 +103,9 @@ def insert(iminpq, key, index):
     Raises:
         Exception
     """
+    # FIXME falta agregar el manejo de excepciones
+    # TODO revisar si es necesario el return
+    # TODO agregar tipos de datos para input y output
     return h.insert(iminpq, key, index)
 
 
@@ -104,6 +120,9 @@ def delMin(iminpq):
     Raises:
         Exception
     """
+    # FIXME falta agregar el manejo de excepciones
+    # TODO revisar si es necesario el return
+    # TODO agregar tipos de datos para input y output
     return (h.delMin(iminpq))
 
 
@@ -120,6 +139,9 @@ def decreaseKey(iminpq, key, newindex):
     Raises:
         Exception
     """
+    # FIXME falta agregar el manejo de excepciones
+    # TODO revisar si es necesario el return
+    # TODO agregar tipos de datos para input y output
     return h.decreaseKey(iminpq, key, newindex)
 
 
@@ -136,6 +158,9 @@ def increaseKey(iminpq, key, newindex):
     Raises:
         Exception
     """
+    # FIXME falta agregar el manejo de excepciones
+    # TODO revisar si es necesario el return
+    # TODO agregar tipos de datos para input y output
     return h.increaseKey(iminpq, key, newindex)
 
 
@@ -150,6 +175,8 @@ def min(iminpq):
     Raises:
         Exception
     """
+    # FIXME falta agregar el manejo de excepciones
+    # TODO agregar tipos de datos para input y output
     return h.min(iminpq)
 
 
@@ -164,4 +191,6 @@ def contains(iminpq, element):
     Raises:
         Exception
     """
+    # FIXME falta agregar el manejo de excepciones
+    # TODO agregar tipos de datos para input y output
     return h.contains(iminpq, element)

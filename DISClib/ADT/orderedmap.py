@@ -25,12 +25,15 @@
  *
  """
 
-
-import config
 import importlib
-assert config
 
 
+# GENERAL
+# FIXME Cambiar todas las funciones y variables al formato snake_case
+# FIXME Indicar siempre que el mapa utilizado en esta clase es un mapa ordenado
+# TODO Explica que tipo de excepciones y errores puede generar cada función
+# FIXME Agregar todos los parámetros a la documentación
+# FIXME Cambiar nombre de cmpfunction para consistencia otras estructuras
 def newMap(omaptype='RBT', cmpfunction=None):
     """
     Crea una tabla de simbolos ordenada.
@@ -62,6 +65,8 @@ def put(map, key, value):
     return map['datastructure'].put(map, key, value)
 
 
+# FIXME Corregir errores de ortografía en la documentación
+# FIXME Corregir error en la documentación del retorno
 def get(map, key):
     """
     Retorna la pareja lleve-valor con llave igual a key
@@ -76,6 +81,7 @@ def get(map, key):
     return map['datastructure'].get(map, key)
 
 
+# TODO Modificar documentación para dejar mismo formato que las otras funciones
 def remove(map, key):
     """
     Elimina la pareja llave,valor, donde llave == key.
@@ -130,6 +136,7 @@ def isEmpty(map):
     return map['datastructure'].isEmpty(map)
 
 
+# TODO Indicar que retorna una lista de DISCLib
 def keySet(map):
     """
     Retorna una lista con todas las llaves de la tabla
@@ -143,6 +150,7 @@ def keySet(map):
     return map['datastructure'].keySet(map)
 
 
+# TODO Indicar que retorna una lista de DISCLib
 def valueSet(map):
     """
     Construye una lista con los valores de la tabla
@@ -240,6 +248,7 @@ def ceiling(map, key):
     return map['datastructure'].ceiling(map, key)
 
 
+# FIXME  renomrar parámetros para que sean consistentes con la documentacion
 def select(map, k):
     """
     Retorna la siguiente llave a la k-esima llave mas pequeña de la tabla
@@ -254,6 +263,8 @@ def select(map, k):
     return map['datastructure'].select(map, k)
 
 
+# FIXME  renomrar parámetros para que sean consistentes con la documentacion
+# FIXME Cambiar documentación del retorno
 def rank(map, key):
     """
     Retorna el número de llaves en la tabla estrictamente menores que key
@@ -281,6 +292,7 @@ def height(map):
     return map['datastructure'].height(map)
 
 
+# TODO Indicar que retorna una lista de DISCLib
 def keys(map, keylo, keyhi):
     """
     Retorna todas las llaves del arbol que se encuentren entre
@@ -298,6 +310,8 @@ def keys(map, keylo, keyhi):
     return map['datastructure'].keys(map, keylo, keyhi)
 
 
+# FIXME Modificar documentación del retorno
+# TODO Indicar que retorna una lista de DISCLib
 def values(map, keylo, keyhi):
     """
     Retorna todas los valores del arbol que se encuentren entre
@@ -325,6 +339,7 @@ switch_module = {
 }
 
 
+# FIXME Modificar documentación para que siga el formato de las demás funciones
 def mapSelector(datastructure):
     """
     Carga dinamicamente el import de la estructura de datos

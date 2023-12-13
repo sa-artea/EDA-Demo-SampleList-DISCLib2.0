@@ -24,7 +24,9 @@
  * Dario Correal
  *
  """
-
+# GENERAL
+#FIXME Cambiar todas las funciones y variables al formato snake_case
+#TODO Explicar más a profundidad que tipo de excepciones y errores puede generar cada función
 
 def newNode(key, value, size):
     """ Crea un nuevo nodo para un árbol binario y lo retorna
@@ -38,6 +40,7 @@ def newNode(key, value, size):
     Raises:
         Exception
     """
+    #FIXME Modelar como dataclass
     node = {'key': key,
             'value': value,
             'size': size,

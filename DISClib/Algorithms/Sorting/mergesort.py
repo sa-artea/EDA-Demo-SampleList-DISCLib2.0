@@ -25,15 +25,19 @@
  *
  """
 
-import config as cf
-from DISClib.ADT import list as lt
-assert cf
+from DISClib.ADT import lists as lt
 
 """
   Los algoritmos de este libro están basados en la implementación
   propuesta por R.Sedgewick y Kevin Wayne en su libro
   Algorithms, 4th Edition
 """
+
+# FIXME: pasar a snake_case de python
+# FIXME: cambiar pruebas unitarias de acuerdo a los cambios realizados
+# TODO: tipar datos de entrada y salida de cada funcion
+# TODO: agregar excepciones mas especificas que no sean Exception
+# TODO mejorar la descricion del algoritmo de la funcion
 
 
 def sort(lst, sort_crit):

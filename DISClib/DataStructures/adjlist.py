@@ -1,4 +1,5 @@
 """
+ # TODO cambiar comentarios de lincencia segun estandard del equipo
  * Copyright 2020, Departamento de sistemas y Computación,
  * Universidad de Los Andes
  *
@@ -24,13 +25,13 @@
  *
  """
 
-
-import config
-from DISClib.ADT import map as map
-from DISClib.ADT import list as lt
+# TODO crear consistencia en para importar modulos
+# # import config
+from DISClib.ADT import maps as map
+from DISClib.ADT import lists as lt
 from DISClib.DataStructures import edge as e
 from DISClib.Utils import error as error
-assert config
+# assert config
 
 """
 Este código está basado en las implementaciones propuestas en:
@@ -39,6 +40,8 @@ Este código está basado en las implementaciones propuestas en:
 """
 
 
+# FIXME cambiar a SnakeCase el formato de funciones y variables
+# TODO agregar anotaciones para documentacion automatica
 def newGraph(size, cmpfunction, directed, type, datastructure):
     """
     Crea un grafo vacio
@@ -53,6 +56,7 @@ def newGraph(size, cmpfunction, directed, type, datastructure):
         Exception
     """
     try:
+        # FIXME cambiar por datatruct nativo de python
         graph = {'vertices': None,
                  'edges': 0,
                  'type': type,
@@ -61,15 +65,21 @@ def newGraph(size, cmpfunction, directed, type, datastructure):
                  'indegree': None,
                  'datastructure': datastructure
                  }
+
+        # TODO dejar variables por defecto como constantes del modulo
+        # FIXME ajustar comportamiento segun actualizaciones del ADT map
+
         graph['vertices'] = map.newMap(numelements=size,
                                        maptype='PROBING',
                                        cmpfunction=cmpfunction)
         if (directed):
+            # FIXME ajustar comportamiento segun actualizaciones ADT map
             graph['indegree'] = map.newMap(numelements=size,
                                            maptype='PROBING',
                                            cmpfunction=cmpfunction)
         return graph
     except Exception as exp:
+        # FIXME ajustar mensaje segun actualizaciones del modulo error
         error.reraise(exp, 'ajlist:newgraph')
 
 
@@ -85,6 +95,9 @@ def insertVertex(graph, vertex):
     Raises:
         Exception
     """
+    # TODO revisar si es necesario el return
+    # TODO agregar tipos de datos para input y output
+    # FIXME ajustar mensaje segun actualizaciones del modulo error
     try:
         edges = lt.newList()
         map.put(graph['vertices'], vertex, edges)
@@ -107,7 +120,7 @@ def removeVertex(graph, vertex):
     Raises:
         Exception
     """
-    # TODO
+    # TODO implementar funcion
     pass
 
 
@@ -123,6 +136,8 @@ def numVertices(graph):
     Raises:
         Exception
     """
+    # TODO agregar tipos de datos para input y output
+    # FIXME ajustar mensaje segun actualizaciones del modulo error
     try:
         return map.size(graph['vertices'])
     except Exception as exp:
@@ -141,6 +156,8 @@ def numEdges(graph):
     Raises:
         Exception
     """
+    # TODO agregar tipos de datos para input y output
+    # FIXME ajustar mensaje segun actualizaciones del modulo error
     try:
         return (graph['edges'])
     except Exception as exp:
@@ -158,6 +175,8 @@ def vertices(graph):
     Raises:
         Exception
     """
+    # TODO agregar tipos de datos para input y output
+    # FIXME ajustar mensaje segun actualizaciones del modulo error
     try:
         lstmap = map.keySet(graph['vertices'])
         return lstmap
@@ -168,7 +187,6 @@ def vertices(graph):
 def edges(graph):
     """
     Retorna una lista con todos los arcos del grafo graph
-    Para un grafo No Dirigido, un arco que conecte 2 vertices solo debe aparecer una vez en la lista.
 
     Args:
         graph: El grafo sobre el que se ejecuta la operacion
@@ -178,6 +196,8 @@ def edges(graph):
     Raises:
         Exception
     """
+    # TODO agregar tipos de datos para input y output
+    # FIXME ajustar mensaje segun actualizaciones del modulo error
     try:
         lstmap = map.valueSet(graph['vertices'])
         lstresp = lt.newList('SINGLE_LINKED', e.compareedges)
@@ -185,13 +205,8 @@ def edges(graph):
             for edge in lt.iterator(lstedge):
                 if (graph['directed']):
                     lt.addLast(lstresp, edge)
-                else: # caso Grafo No Dirigido
-                    vertexA = e.either(edge)
-                    vertexB = e.other(edge, vertexA)
-                    invertedEdge = e.newEdge(vertexB, vertexA, e.weight(edge))
-                    if (not lt.isPresent(lstresp, edge)) and (not lt.isPresent(lstresp, invertedEdge)):
-                        # Entre dos vertices que exista un arco, incluir unicamente un arco que los conecte 
-                        lt.addLast(lstresp, edge)
+                elif (not lt.isPresent(lstresp, edge)):
+                    lt.addLast(lstresp, edge)
         return lstresp
     except Exception as exp:
         error.reraise(exp, 'ajlist:edges')
@@ -210,6 +225,8 @@ def degree(graph, vertex):
     Raises:
         Exception
     """
+    # TODO agregar tipos de datos para input y output
+    # FIXME ajustar mensaje segun actualizaciones del modulo error
     try:
         element = map.get(graph['vertices'], vertex)
         lst = element['value']
@@ -231,6 +248,9 @@ def indegree(graph, vertex):
     Raises:
         Exception
     """
+    # TODO agregar tipos de datos para input y output
+    # FIXME ajustar comportamiento para acoplar a manejo de errores
+    # FIXME ajustar mensaje segun actualizaciones del modulo error
     try:
         if (graph['directed']):
             degree = map.get(graph['indegree'], vertex)
@@ -253,6 +273,9 @@ def outdegree(graph, vertex):
     Raises:
         Exception
     """
+    # TODO agregar tipos de datos para input y output
+    # FIXME ajustar comportamiento para acoplar a manejo de errores
+    # FIXME ajustar mensaje segun actualizaciones del modulo error
     try:
         if (graph['directed']):
             element = map.get(graph['vertices'], vertex)
@@ -277,6 +300,8 @@ def getEdge(graph, vertexa, vertexb):
     Raises:
         Exception
     """
+    # TODO agregar tipos de datos para input y output
+    # FIXME ajustar mensaje segun actualizaciones del modulo error
     try:
         element = map.get(graph['vertices'], vertexa)
         lst = element['value']
@@ -285,8 +310,8 @@ def getEdge(graph, vertexa, vertexb):
                 if (e.either(edge) == vertexa and
                    (e.other(edge, e.either(edge)) == vertexb)):
                     return edge
-            elif(e.either(edge) == vertexa or
-                 (e.other(edge, e.either(edge)) == vertexa)):
+            elif (e.either(edge) == vertexa or
+                (e.other(edge, e.either(edge)) == vertexa)):
                 if (e.either(edge) == vertexb or
                    (e.other(edge, e.either(edge)) == vertexb)):
                     return edge
@@ -308,6 +333,8 @@ def containsVertex(graph, vertex):
     Raises:
         Exception
     """
+    # TODO agregar tipos de datos para input y output
+    # FIXME ajustar mensaje segun actualizaciones del modulo error
     try:
         return map.get(graph['vertices'], vertex) is not None
     except Exception as exp:
@@ -332,6 +359,9 @@ def addEdge(graph, vertexa, vertexb, weight=0):
     Raises:
         Exception
     """
+    # TODO revisar si es necesario el return
+    # TODO agregar tipos de datos para input y output
+    # FIXME ajustar mensaje segun actualizaciones del modulo error
     try:
         # Se crea el arco
         edge = e.newEdge(vertexa, vertexb, weight)
@@ -365,6 +395,8 @@ def adjacents(graph, vertex):
     Raises:
         Exception
     """
+    # TODO agregar tipos de datos para input y output
+    # FIXME ajustar mensaje segun actualizaciones del modulo error
     try:
         element = map.get(graph['vertices'], vertex)
         lst = element['value']
@@ -394,6 +426,8 @@ def adjacentEdges(graph, vertex):
     Raises:
         Exception
     """
+    # TODO agregar tipos de datos para input y output
+    # FIXME ajustar mensaje segun actualizaciones del modulo error
     try:
         element = map.get(graph['vertices'], vertex)
         lst = element['value']

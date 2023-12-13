@@ -23,6 +23,11 @@
  *
  """
 
+# GENERAL
+# FIXME Cambiar todas las funciones y variables al formato snake_case
+# TODO Explicar tipo de excepciones y errores puede generar cada función
+
+
 RED = 0
 BLACK = 1
 
@@ -42,6 +47,7 @@ def newNode(key, value, size, color):
     Raises:
         Exception
     """
+    # FIXME Modelar como dataclass
     node = {'key': key,
             'value': value,
             'size': size,
@@ -78,7 +84,7 @@ def getValue(node):
         Exception
     """
     if (node is not None):
-        return(node['value'])
+        return (node['value'])
     return node
 
 
@@ -92,6 +98,5 @@ def getKey(node):
         Exception
     """
     if (node is not None):
-        return(node['key'])
+        return (node['key'])
     return node
-

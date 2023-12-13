@@ -1,29 +1,4 @@
-"""
- * Copyright 2020, Departamento de sistemas y Computación, Universidad
- * de Los Andes
- *
- *
- * Desarrolado para el curso ISIS1225 - Estructuras de Datos y Algoritmos
- *
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along withthis program.  If not, see <http://www.gnu.org/licenses/>.
- *
- * Contribuciones
- *
- * Dario Correal
- """
-
+# Purpose: Vista del programa
 import config as cf
 import sys
 import controller
@@ -73,10 +48,14 @@ def printAuthorData(author):
     la informacin solicitada.
     """
     if author:
-        print('Autor encontrado: ' + author['name'])
-        print('Promedio: ' + str(author['average_rating']))
-        print('Total de libros: ' + str(lt.size(author['books'])))
-        for book in lt.iterator(author['books']):
+        # print(author)
+        # print('Autor encontrado: ' + author['name'])
+        # print('Promedio: ' + str(author['average_rating']))
+        # print('Total de libros: ' + str(lt.size(author['books'])))
+        print('Total de libros: ' + str(author.size()))
+        
+        # for book in lt.iterator(author['books']):
+        for book in author:
             print('Titulo: ' + book['title'] + '  ISBN: ' + book['isbn'])
     else:
         print('No se encontro el autor')
@@ -86,10 +65,11 @@ def printBestBooks(books):
     """
     Imprime los mejores libros solicitados
     """
-    size = lt.size(books)
+    size = books.size()
     if size:
         print(' Estos son los mejores libros: ')
-        for book in lt.iterator(books):
+        # for book in lt.iterator(books):
+        for book in books:
             print('Titulo: ' + book['title'] + '  ISBN: ' +
                   book['isbn'] + ' Rating: ' + book['average_rating'])
     else:
